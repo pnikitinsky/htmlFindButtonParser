@@ -28,10 +28,10 @@ class Parser
     end
 
     def search_for_element_in_another_html()
-      puts "In 75% of diff cases there are the same css classes"
+      puts 'In 80% of cases there are the same css classes'
       another_element = @html_doc.xpath("//a[@class='#{@element_class}']").first
       if another_element.nil?
-        puts "In other 75% of diff cases there is the same title"
+        puts 'In other 80% of cases there is the same title'
         @html_doc.xpath("//a[@title='#{@element_title}']").first
       end
       puts 'Another button\'s xpath: ' + another_element.css_path rescue puts 'Crap cant find by class nor by title'
