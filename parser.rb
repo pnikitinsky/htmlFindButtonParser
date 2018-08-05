@@ -2,10 +2,10 @@ require 'nokogiri'
 
 class Parser
   # It is possible to use *args here, but in this particular case i'd like to use key-value arguments
-  def initialize(original_html:, another_html:, id:'make-everything-ok-button')
+  def initialize(original_html:, another_html:, id:)
     @original_html = original_html
     @another_html = another_html
-    @element_id = id
+    @element_id = id.nil? ? 'make-everything-ok-button' : id
   end
 
   def get_element_xpath()
@@ -32,9 +32,9 @@ class Parser
       another_element = @html_doc.xpath("//a[@class='#{@element_class}']").first
       if another_element.nil?
         puts 'In other 80% of cases there is the same title'
-        @html_doc.xpath("//a[@title='#{@element_title}']").first
+        another_element = @html_doc.xpath("//a[@title='#{@element_title}']").first
       end
-      puts 'Another button\'s xpath: ' + another_element.css_path rescue puts 'Crap cant find by class nor by title'
+      puts 'Another button\'s xpath: ' + another_element.css_path rescue puts 'Crap can\'t find by class nor by title'
     end
 end
 
